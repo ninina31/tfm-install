@@ -1,5 +1,7 @@
 class install {	
 
+	class {'iptables':}
+
 	class {'apache':}
 
 	apache::vhost { 'portal.dev':
