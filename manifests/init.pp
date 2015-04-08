@@ -6,14 +6,14 @@ class install {
 
 	apache::vhost { 'portal.dev':
 	      port          => '80',
-	      docroot       => '/www/',
+	      docroot       => '/www',
 	      docroot_owner => 'vagrant',
 	      docroot_group => 'vagrant',
 	}
 
 	apache::vhost { 'portal.pro':
 	      port          => '80',
-	      docroot       => '/www/',
+	      docroot       => '/www',
 	      docroot_owner => 'vagrant',
 	      docroot_group => 'vagrant',
 	}
@@ -38,6 +38,10 @@ class install {
 	  version => 'latest',
 	  require => Yumrepo[$yum_repo]
 	}
+
+
+	include apache::mod::php
+	php::module { ['pdo']: }
 
 	####################################################### php ###############################################################
 
