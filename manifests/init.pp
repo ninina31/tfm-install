@@ -45,25 +45,18 @@ class install {
 
 	####################################################### php ###############################################################
 
-	#class { 'yum':
-	#    defaultrepo => false,
-	#    extrarepo   => '' ,
-	#}
+
+	###################################################### MySQL ###############################################################
 
 	class { 'yum::repo::mysql_community':
-	    enabled_version => '5.5',
-	}
+          enabled_version => '5.6',
+    }
 
-	  package { 'mysql-community-server':
-	    ensure  => '5.5.42-2.el6',
+	package { 'mysql-community-server':
+	    ensure  => 'latest',
 	    require => Class['yum::repo::mysql_community'],
 	}
 
-	#class {'::mysql::server':
-	#	root_password    => 'root',
-	#  	override_options => { 'mysqld' => { 'max_connections' => '512' } }
-	#}
-	#
 
 	class { 'init_mysql':
 		subscribe 	=> Class['yum::repo::mysql_community'],
@@ -73,8 +66,10 @@ class install {
 	  	ensure  => 'present',
 	  	charset => 'latin1',
 	  	collate => 'latin1_swedish_ci',
-	  	subscribe 	=> Class['init_mysql']
+	  	#subscribe 	=> Class['init_mysql']
 	}
+
+	###################################################### MySQL ###############################################################
 
 	class {'memcached':}
 
