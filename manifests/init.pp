@@ -66,7 +66,7 @@ class install {
 	  	ensure  => 'present',
 	  	charset => 'latin1',
 	  	collate => 'latin1_swedish_ci',
-	  	#subscribe 	=> Class['init_mysql']
+	  	subscribe 	=> Class['init_mysql']
 	}
 
 	###################################################### MySQL ###############################################################
